@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "803107423539",
+    "firebase_url": "https://hallowed-grin-213811.firebaseio.com",
+    "project_id": "hallowed-grin-213811",
+    "storage_bucket": "hallowed-grin-213811.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803107423539:android:2e062a7dcbddaa924a6a46",
+        "android_client_info": {
+          "package_name": "com.example.adimn.neurosonica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803107423539-jde0cr0hqksndhegprq9uvs4d0465ff8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvxhowk22qt_iXe3SATCiiJn5EBWK9crw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803107423539-idgs34ljc69hv8eldhhjeapk24u580qg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803107423539:android:8786073a379d5f554a6a46",
+        "android_client_info": {
+          "package_name": "com.reactnativeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803107423539-jde0cr0hqksndhegprq9uvs4d0465ff8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvxhowk22qt_iXe3SATCiiJn5EBWK9crw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803107423539-idgs34ljc69hv8eldhhjeapk24u580qg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803107423539:android:87f788017ed10a19",
+        "android_client_info": {
+          "package_name": "com.roomnett"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803107423539-f4k86h7cvbi5mvjpa7l63lcajbqop2uf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roomnett",
+            "certificate_hash": "7c2beaf66e12e5ce04a7e7dfe8b7c015a4b80d8d"
+          }
+        },
+        {
+          "client_id": "803107423539-jde0cr0hqksndhegprq9uvs4d0465ff8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvxhowk22qt_iXe3SATCiiJn5EBWK9crw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803107423539-idgs34ljc69hv8eldhhjeapk24u580qg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
