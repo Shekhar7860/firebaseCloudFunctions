@@ -43,15 +43,19 @@ const App: () => React$Node = () => {
   useEffect(() => {
     // Get the device token
    // saveTokenToDatabase()
-    messaging()
-      .getToken()
-      .then(token => {
-        return saveTokenToDatabase(token);
-      });
+    // messaging()
+    //   .getToken()
+    //   .then(token => {
+    //     return saveTokenToDatabase(token);
+    //   });
     }, [])
 
+    const result = (result) => {
+      console.log('resulttt', result)
+  console.log('result', result.json())
+    }
   callFun = () => {
-    fetch('http://localhost:5000/hallowed-grin-213811/us-central1/sendPush', {
+    fetch('https://us-central1-hallowed-grin-213811.cloudfunctions.net/sendPush', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -62,12 +66,12 @@ const App: () => React$Node = () => {
       body: "this iss my push from shekhar"
     }),
   })
-    .then((response) => response.json())
+    .then((response) => result(response))
     .then((responseJson) => {
-      console.log(responseJson);
+      console.log('respos', responseJson);
     })
     .catch((error) => {
-      console.error(error);
+      console.error('error', error);
     });;
   }
   return (
