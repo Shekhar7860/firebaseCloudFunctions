@@ -25,7 +25,7 @@ const reducer = (state, action) => {
 
    
     
-const Member = () => {
+const Member = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState)
     goBack = () => {
         props.navigation.goBack()
