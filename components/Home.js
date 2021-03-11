@@ -10,12 +10,12 @@ import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   StatusBar,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import database from '@react-native-firebase/database';
 import messaging from '@react-native-firebase/messaging';
@@ -82,19 +82,22 @@ const Home: (props) => React$Node = (props) => {
     <BannerAd unitId={'ca-app-pub-1116385198791430/7349951722'} size={BannerAdSize.FULL_BANNER}/>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={{flex:1}}>
-        <View
-          style={styles.scrollView}>
-          <Text style={{textAlign :'center', fontSize : 32, fontWeight : '600'}}>Welcome To Helping Hands App</Text>
-          <Text style={{textAlign :'center', fontSize : 32, fontWeight : '600'}}>This App is Specially designed to help the people with disablities, children who cannot study, aged people who are homeless </Text>
+        <ScrollView
+          contentContainerStyle={styles.scrollView}>
+          <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600'}}>Welcome To Online Transactions App (ऑनलाइन लेनदेन ऐप में आपका स्वागत है)?</Text>
+          <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600'}}>This App is Specially designed to help the people who want to do online transactions but dont know the procedure or dont have education(
+यह ऐप विशेष रूप से उन लोगों की मदद करने के लिए डिज़ाइन किया गया है जो ऑनलाइन लेनदेन करना चाहते हैं, लेकिन प्रक्रिया नहीं जानते हैं और न ही शिक्षा है)</Text>
+<Text style={{textAlign :'center', fontSize : 20, fontWeight : '600'}}>Through this app, you can place online orders, book tickets, hotels, transfer instant money, get anything online and much more (इस ऐप के माध्यम से, आप ऑनलाइन ऑर्डर बुक कर सकते हैं, टिकट बुक कर सकते हैं, होटल कर सकते हैं, तत्काल पैसे ट्रांसफर कर सकते हैं, ऑनलाइन कुछ भी प्राप्त कर सकते हैं और बहुत कुछ)</Text>
+<View style={{alignItems : 'center'}}>
           <TouchableOpacity style={styles.buttonWidth} onPress={() => props.navigation.navigate('Help')}>
-            <Text style={styles.alignCenter}>Need Help</Text>
+            <Text style={styles.alignCenter}>Lets Get Started</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonWidth} onPress={() => props.navigation.navigate('Member')}>
+          {/* <TouchableOpacity style={styles.buttonWidth} onPress={() => props.navigation.navigate('Member')}>
             <Text style={styles.alignCenter}>Become A Member</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {/* <Button title="Get Started" onPress={() => callFun()}/> */}
-         
-        </View>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     </>
   );
@@ -103,7 +106,7 @@ const Home: (props) => React$Node = (props) => {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
-    justifyContent : 'center', alignItems : 'center', flex:1
+    
   },
   engine: {
     position: 'absolute',

@@ -18,6 +18,8 @@ const reducer = (state, action) => {
             return { ...state, phone: action.value }
         case 'about':
                 return { ...state, about: action.value }
+        case 'location':
+        return { ...state, location: action.value }
         default:
             return state
     }
@@ -30,40 +32,45 @@ const Member = (props) => {
     goBack = () => {
         props.navigation.goBack()
     }
-   
+   const result = (res) => {
+     console.log('resss', res)
+   }
 
     const handleClickEvent = () => {
-        console.log('state', state, state.phone.length)
-       if(state.name && state.email && state.phone && state.about){
+        // console.log('state', state, state.phone.length)
+       if(state.name && state.email && state.phone && state.about && state.location){
            if(state.phone.length == 10){
        database()
-       .ref('/member')
+       .ref('/request')
        .push({
          name : state.name,
          phone : state.phone,
          email : state.email,
-         about : state.about
+         about : state.about,
+         location : state.location,
+         date : new Date().toUTCString()
        })
        .then(() => {
            Alert.alert("You will be notified shortly")
-           fetch('https://us-central1-hallowed-grin-213811.cloudfunctions.net/sendPush', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              title: 'New Member Added',
-              body: state.name + state.phone + 'has been aded'
-            }),
-          })
-            .then((response) => result(response))
-            .then((responseJson) => {
-              console.log('respos', responseJson);
-            })
-            .catch((error) => {
-              console.error('error', error);
-            })});
+          //  fetch('https://us-central1-hallowed-grin-213811.cloudfunctions.net/sendPush', {
+          //   method: 'POST',
+          //   headers: {
+          //     Accept: 'application/json',
+          //     'Content-Type': 'application/json',
+          //   },
+          //   body: JSON.stringify({
+          //     title: 'New Member Added',
+          //     body: state.name + state.phone + 'has been aded'
+          //   }),
+          // })
+          //   .then((response) => result(response))
+          //   .then((responseJson) => {
+          //     console.log('respos', responseJson);
+          //   })
+          //   .catch((error) => {
+          //     console.error('error', error);
+          //   })
+          });
        
     }
     else {
@@ -90,23 +97,28 @@ const Member = (props) => {
         if(first == 'about'){
             dispatch({ type: 'about', value: second })
          }
+         if(first == 'location'){
+          dispatch({ type: 'location', value: second })
+       }
     }
     return( <><View style={styles.toolbar}>
         <TouchableOpacity style={styles.toolbarButton} onPress={() => goBack()}>
              <Image style={{width:30,marginLeft:5,  height:30}}source={require('../images/back.png')}></Image>
              </TouchableOpacity>
-             <Text style={styles.toolbarTitle}>Become Member</Text>
+             <Text style={styles.toolbarTitle}>Submit Task</Text>
              <Text style={styles.toolbarButton}></Text>
          </View>
          <View>
 <InputField  name={'name'} placeholder={'Name'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
 <InputField  name={'email'} placeholder={'Email'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
 <InputField  name={'phone'} placeholder={'Phone'} maxLength={10} keyboardType={'numeric'} getFunc ={(first, second) => alertFunc(first, second)}/>
-<InputField  name={'about'} placeholder={'About'}  keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)} height={100} textAlignVertical = {'top'}/>
+<InputField  name={'location'} placeholder={'Location'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
+<InputField  name={'about'} placeholder={'Description'}  keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)} height={120} textAlignVertical = {'top'}/>
 </View>
-<View style={{marginTop : 30}}>
-<Button onPress={handleClickEvent} title={'Submit'}></Button>
-</View></>)
+<TouchableOpacity style={styles.buttonWidth} onPress={() => handleClickEvent()}>
+          <Text style={styles.alignCenter}>Submit</Text>
+          </TouchableOpacity>
+</>)
 }
 
 export default Member;
@@ -186,4 +198,17 @@ const styles = StyleSheet.create({
       color:'white',
       marginTop:-20
     },
+    buttonWidth : {
+      width : '80%',
+      backgroundColor : '#e74c3c',
+      marginTop : 20,
+      height : 40,
+      justifyContent : 'center',
+      alignSelf : 'center'
+    },
+    alignCenter : {
+      textAlign : 'center',
+      color : 'white',
+      fontWeight : 'bold'
+    }
   });

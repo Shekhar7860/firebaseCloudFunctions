@@ -1,4 +1,4 @@
-import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert} from 'react-native'
+import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert, ScrollView} from 'react-native'
 import React, { useEffect, useRef, useReducer } from 'react';
 import InputField from './InputField'
 import database from '@react-native-firebase/database';
@@ -96,15 +96,33 @@ const Help = (props) => {
                      <Text style={styles.toolbarTitle}>Need Help</Text>
                      <Text style={styles.toolbarButton}></Text>
                  </View>
-                 <View>
-       <InputField  name={'name'} placeholder={'Name'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
+                 <BannerAd unitId={'ca-app-pub-1116385198791430/6744474732'} size={BannerAdSize.FULL_BANNER}/>
+                 <View style={{flex:1, marginBottom : 20}}>
+                   <ScrollView >
+                 <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>Below Are The List Of Services You Can Get From This App (ऑनलाइन लेनदेन ऐप में आपका स्वागत है)?</Text>
+                 <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>1. Book Hotels/Tickets/Buses/Trains (बुक होटल / टिकट / बस / ट्रेनें)</Text>
+                 <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>2. Purchase Things Online (चीजें ऑनलाइन खरीदें)</Text>
+                 <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>3. Order Anything for your beloved instantly (
+अपने प्रिय के लिए तुरंत कुछ भी ऑर्डर करें)</Text>
+                 <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>4. Other Online Transactions (अन्य ऑनलाइन लेनदेन)</Text>
+
+                 <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>Additional Services (अतिरिक्त सेवाएं)</Text>
+                 <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>1. Fill A Govt Online Form (एक ऑनलाइन फॉर्म भरें)</Text>
+                 <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>2. Translate any text in english, write any article in english (
+कोई भी लेख अंग्रेजी में लिखें )</Text>
+<Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>3. Other Online Work You Dont Know How To Do (
+अन्य ऑनलाइन कार्य आप न जाने कैसे )</Text>
+          <TouchableOpacity style={styles.buttonWidth} onPress={() => props.navigation.navigate('Member')}>
+          <Text style={styles.alignCenter}>Give Your Task</Text>
+          </TouchableOpacity>
+                 </ScrollView>
+                 
+       {/* <InputField  name={'name'} placeholder={'Name'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
        <InputField  name={'email'} placeholder={'Email'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
        <InputField  name={'phone'} placeholder={'Phone'} maxLength={10} keyboardType={'numeric'} getFunc ={(first, second) => alertFunc(first, second)}/>
-       <InputField  name={'description'} placeholder={'Describe Issue'}  keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)} height={100}   textAlignVertical = {'top'}/>
+       <InputField  name={'description'} placeholder={'Describe Issue'}  keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)} height={100}   textAlignVertical = {'top'}/> */}
       </View>
-      <View style={{marginTop : 30}}>
-      <Button onPress={handleClickEvent} title={'Submit'}></Button>
-      </View><BannerAd unitId={'ca-app-pub-1116385198791430/6744474732'} size={BannerAdSize.FULL_BANNER}/></>)
+      </>)
 }
 
 export default Help
@@ -185,4 +203,17 @@ const styles = StyleSheet.create({
       color:'white',
       marginTop:-20
     },
+    buttonWidth : {
+      width : '80%',
+      backgroundColor : '#e74c3c',
+      marginTop : 20,
+      height : 40,
+      justifyContent : 'center',
+      alignSelf : 'center'
+    },
+    alignCenter : {
+      textAlign : 'center',
+      color : 'white',
+      fontWeight : 'bold'
+    }
   });
