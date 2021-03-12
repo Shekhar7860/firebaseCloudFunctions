@@ -52,24 +52,24 @@ const Member = (props) => {
        })
        .then(() => {
            Alert.alert("You will be notified shortly")
-          //  fetch('https://us-central1-hallowed-grin-213811.cloudfunctions.net/sendPush', {
-          //   method: 'POST',
-          //   headers: {
-          //     Accept: 'application/json',
-          //     'Content-Type': 'application/json',
-          //   },
-          //   body: JSON.stringify({
-          //     title: 'New Member Added',
-          //     body: state.name + state.phone + 'has been aded'
-          //   }),
-          // })
-          //   .then((response) => result(response))
-          //   .then((responseJson) => {
-          //     console.log('respos', responseJson);
-          //   })
-          //   .catch((error) => {
-          //     console.error('error', error);
-          //   })
+           fetch('https://us-central1-hallowed-grin-213811.cloudfunctions.net/sendPush', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              title: 'New Online Transaction Posted',
+              body: state.name + state.phone + 'has been aded'
+            }),
+          })
+            .then((response) => result(response))
+            .then((responseJson) => {
+              console.log('respos', responseJson);
+            })
+            .catch((error) => {
+              console.error('error', error);
+            })
           });
        
     }

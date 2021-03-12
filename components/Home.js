@@ -46,11 +46,11 @@ const Home: (props) => React$Node = (props) => {
   useEffect(() => {
     // Get the device token
    // saveTokenToDatabase()
-    // messaging()
-    //   .getToken()
-    //   .then(token => {
-    //     return saveTokenToDatabase(token);
-    //   });
+    messaging()
+      .getToken()
+      .then(token => {
+        return saveTokenToDatabase(token);
+      });
     }, [])
 
     const result = (result) => {

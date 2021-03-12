@@ -1,4 +1,4 @@
-package com.reactnativeproject;
+package com.onlinetransactions;
 
 import android.app.Application;
 import android.content.Context;

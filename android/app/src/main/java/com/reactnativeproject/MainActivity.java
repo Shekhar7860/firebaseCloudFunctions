@@ -1,4 +1,4 @@
-package com.reactnativeproject;
+package com.onlinetransactions;
 
 import com.facebook.react.ReactActivity;
 

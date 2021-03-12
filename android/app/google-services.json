@@ -30,6 +30,49 @@
             {
               "client_id": "803107423539-idgs34ljc69hv8eldhhjeapk24u580qg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "803107423539-uahrbvj4pru2rqilr350u5rjc64sqgpa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.reactNativeProject"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803107423539:android:076bceb499221b1e4a6a46",
+        "android_client_info": {
+          "package_name": "com.onlinetransactions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803107423539-jde0cr0hqksndhegprq9uvs4d0465ff8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvxhowk22qt_iXe3SATCiiJn5EBWK9crw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803107423539-idgs34ljc69hv8eldhhjeapk24u580qg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "803107423539-uahrbvj4pru2rqilr350u5rjc64sqgpa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.reactNativeProject"
+              }
             }
           ]
         }
@@ -59,6 +102,13 @@
             {
               "client_id": "803107423539-idgs34ljc69hv8eldhhjeapk24u580qg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "803107423539-uahrbvj4pru2rqilr350u5rjc64sqgpa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.reactNativeProject"
+              }
             }
           ]
         }
@@ -96,6 +146,13 @@
             {
               "client_id": "803107423539-idgs34ljc69hv8eldhhjeapk24u580qg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "803107423539-uahrbvj4pru2rqilr350u5rjc64sqgpa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.reactNativeProject"
+              }
             }
           ]
         }
