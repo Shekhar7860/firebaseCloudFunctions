@@ -3,6 +3,9 @@ import React, { useEffect, useRef, useReducer } from 'react';
 import InputField from './InputField'
 import database from '@react-native-firebase/database';
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
+const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/5537250561', {
+  requestNonPersonalizedAdsOnly: true,
+});
 const initialState = {
     name: '',
     email: '',
@@ -24,6 +27,18 @@ const reducer = (state, action) => {
     }
 }
 const Help = (props) => {
+  useEffect(() => {
+    rewarded.onAdEvent((type, error, reward) => {
+      if (type === RewardedAdEventType.LOADED) {
+        rewarded.show();
+      }
+      if (type === RewardedAdEventType.EARNED_REWARD) {
+        console.log('User earned reward of ', reward);
+      }
+    });
+    
+    rewarded.load();
+  }, [])
     const [state, dispatch] = useReducer(reducer, initialState)
     goBack = () => {
         props.navigation.goBack()
@@ -96,7 +111,7 @@ const Help = (props) => {
                      <Text style={styles.toolbarTitle}>Need Help</Text>
                      <Text style={styles.toolbarButton}></Text>
                  </View>
-                 <BannerAd unitId={'ca-app-pub-1116385198791430/6744474732'} size={BannerAdSize.FULL_BANNER}/>
+                 <BannerAd unitId={'ca-app-pub-1116385198791430/7780270526'} size={BannerAdSize.FULL_BANNER}/>
                  <View style={{flex:1, marginBottom : 20}}>
                    <ScrollView >
                  <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 20}}>Below Are The List Of Services You Can Get From This App (ऑनलाइन लेनदेन ऐप में आपका स्वागत है)?</Text>

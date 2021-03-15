@@ -46,11 +46,11 @@ const Home: (props) => React$Node = (props) => {
   useEffect(() => {
     // Get the device token
    // saveTokenToDatabase()
-    messaging()
-      .getToken()
-      .then(token => {
-        return saveTokenToDatabase(token);
-      });
+    // messaging()
+    //   .getToken()
+    //   .then(token => {
+    //     return saveTokenToDatabase(token);
+    //   });
     }, [])
 
     const result = (result) => {
@@ -79,7 +79,7 @@ const Home: (props) => React$Node = (props) => {
   }
   return (
     <>
-    <BannerAd unitId={'ca-app-pub-1116385198791430/7349951722'} size={BannerAdSize.FULL_BANNER}/>
+    <BannerAd unitId={'ca-app-pub-1116385198791430/7588698839'} size={BannerAdSize.FULL_BANNER}/>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={{flex:1}}>
         <ScrollView

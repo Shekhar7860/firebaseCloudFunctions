@@ -1,7 +1,11 @@
-import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert} from 'react-native'
+import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert, ScrollView} from 'react-native'
 import React, { useEffect, useRef, useReducer } from 'react';
 import InputField from './InputField'
 import database from '@react-native-firebase/database';
+import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
+const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3671018146205481/5043637990', {
+  requestNonPersonalizedAdsOnly: true,
+});
 const initialState = {
     name: '',
     email: '',
@@ -28,6 +32,15 @@ const reducer = (state, action) => {
    
     
 const Member = (props) => {
+  useEffect(() => {
+    interstitial.onAdEvent((type) => {
+      if (type === AdEventType.LOADED) {
+        interstitial.show();
+      }
+    });
+    
+    interstitial.load();
+  }, [])
     const [state, dispatch] = useReducer(reducer, initialState)
     goBack = () => {
         props.navigation.goBack()
@@ -101,23 +114,28 @@ const Member = (props) => {
           dispatch({ type: 'location', value: second })
        }
     }
-    return( <><View style={styles.toolbar}>
+    return( <>
+    <BannerAd unitId={'ca-app-pub-1116385198791430/2990978273'} size={BannerAdSize.FULL_BANNER}/>
+    <View style={styles.toolbar}>
         <TouchableOpacity style={styles.toolbarButton} onPress={() => goBack()}>
              <Image style={{width:30,marginLeft:5,  height:30}}source={require('../images/back.png')}></Image>
              </TouchableOpacity>
              <Text style={styles.toolbarTitle}>Submit Task</Text>
              <Text style={styles.toolbarButton}></Text>
          </View>
-         <View>
+         <View style={{flex : 1, marginBottom : 10}}>
+           <ScrollView>
 <InputField  name={'name'} placeholder={'Name'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
 <InputField  name={'email'} placeholder={'Email'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
 <InputField  name={'phone'} placeholder={'Phone'} maxLength={10} keyboardType={'numeric'} getFunc ={(first, second) => alertFunc(first, second)}/>
 <InputField  name={'location'} placeholder={'Location'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
 <InputField  name={'about'} placeholder={'Description'}  keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)} height={120} textAlignVertical = {'top'}/>
-</View>
 <TouchableOpacity style={styles.buttonWidth} onPress={() => handleClickEvent()}>
           <Text style={styles.alignCenter}>Submit</Text>
           </TouchableOpacity>
+</ScrollView>
+</View>
+
 </>)
 }
 
