@@ -4,7 +4,7 @@ exports.sendPushHelp = functions.https.onRequest((request, result) => {
 const serverKey = "AAAAuvzuxTM:APA91bEFnoRRsFK6aCLUKGMFJjifPLAZX6yHmVXMjmzrFXbcBZeDMvN_13vaECsAHCCg8czuxdzOSN4hbgwUE4tPD9suv2pbOeeRoGwaz7Bg0JVrvdS10RIkaaxEEL7LcfHI0x4edcOoDF9kLkj-I0IN7sndOr5AOQ"; 
   const fcm = new FCM(serverKey);
   const message = { 
-to: "dWcUMwpGTpOQaavZPrkhK-:APA91bEEz0VWHnjE9CmxS86Ujb02QT3pYSHgSRO7p_HxTYxbs6ppC_JGuBVEdWjrRQHgkur-zIbId-DJ6ib7YIQvuxrW4sAkdGgNXu_ZQWUeqYtBe8VW8ssrtdiY77elcxJe3X3TOHUI",
+to: "fl-D4MKTTkqNBpu5AXslLq:APA91bGgpdaCA4HHfO749608vpdsUIfHhIZz0Xo2JoqUNqgt0zD-3WfUuYVLf4N488ZJzvSjARRfWrYdDrn6TtH11urLuyLqgx3EhJn-VCA48swcHNxtntUDOHtKrjj8_HF6hPCTfBZb",
 notification: {
 title: "Title of your push notification from app", 
 body: "Body of your push notification"
