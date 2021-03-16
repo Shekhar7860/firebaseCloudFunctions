@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/admob": "^11.0.0",
     "@react-native-firebase/app": "^10.8.1",
@@ -26,7 +27,8 @@
     "react-native-reanimated": "^2.0.0",
     "react-native-responsive-screen": "^1.4.2",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-screens": "^2.18.1"
+    "react-native-screens": "^2.18.1",
+    "react-native-upi-pay": "^1.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",

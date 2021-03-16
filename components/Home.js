@@ -84,14 +84,10 @@ const Home: (props) => React$Node = (props) => {
       <SafeAreaView style={{flex:1}}>
         <View
           style={styles.scrollView}>
-          <Text style={{textAlign :'center', fontSize : 23, fontWeight : '600'}}>Welcome To Helping Hands App (
-निःशुल्क हाथ एप्लिकेशन की मदद करने के लिए आपका स्वागत है)</Text>
-          <Text style={{textAlign :'center', fontSize : 23, fontWeight : '600'}}>This App is Specially designed to help the people with disablities, children who cannot study, aged people who are homeless (इस एप्लिकेशन को विशेष रूप से असामनता वाले बच्चों की मदद करने के लिए डिज़ाइन किया गया है, जो बच्चे अध्ययन नहीं कर सकते हैं, वृद्ध लोग जो बेघर हैं) </Text>
+          <Text style={{textAlign :'center', fontSize : 32, fontWeight : '600'}}>Welcome To Common React Native Issues App</Text>
+          <Text style={{textAlign :'center', fontSize : 32, fontWeight : '600'}}>This App is Specially designed to help the freshers/developers who face issues while developing android/ios apps using react native </Text>
           <TouchableOpacity style={styles.buttonWidth} onPress={() => props.navigation.navigate('Help')}>
-            <Text style={styles.alignCenter}>Need Help (मदद की ज़रूरत है)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonWidth} onPress={() => props.navigation.navigate('Member')}>
-            <Text style={styles.alignCenter}>Become A Member (सदस्य बने)</Text>
+            <Text style={styles.alignCenter}>Lets Get Started</Text>
           </TouchableOpacity>
           {/* <Button title="Get Started" onPress={() => callFun()}/> */}
          
@@ -144,7 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor : '#e74c3c',
     marginTop : 20,
     height : 40,
-    justifyContent : 'center'
+    justifyContent : 'center',
   },
   alignCenter : {
     textAlign : 'center',

@@ -1,4 +1,4 @@
-package com.comeandhelp;
+package com.reactnativeproject;
 
 import com.facebook.react.ReactActivity;
 

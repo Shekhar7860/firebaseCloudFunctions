@@ -130,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.comeandhelp"
+        applicationId "com.reactnativeproject"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

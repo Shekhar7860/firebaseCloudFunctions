@@ -1,20 +1,20 @@
 import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert, Linking} from 'react-native'
 import React, { useEffect, useRef, useReducer } from 'react';
-import InputField from './InputField'
 import database from '@react-native-firebase/database';
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
-const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/4118311398', {
+const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/9894857030', {
   requestNonPersonalizedAdsOnly: true,
 });
-const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/5352777109', {
+const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/6567153406', {
   requestNonPersonalizedAdsOnly: true,
 });
-
+import RNUpiPayment from "react-native-upi-pay";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const initialState = {
     name: '',
     email: '',
     phone : '',
-    description : ''
+    about : ''
 }
 const reducer = (state, action) => {
     switch (action.type) {
@@ -24,23 +24,29 @@ const reducer = (state, action) => {
             return { ...state, email: action.value }
         case 'phone':
             return { ...state, phone: action.value }
-        case 'description':
-                return { ...state, description: action.value }
+        case 'about':
+                return { ...state, about: action.value }
         default:
             return state
     }
 }
-const Help = (props) => {
+
+   
+    
+const Question = (props) => {
+  useEffect(() => {
+    // rewarded.onAdEvent((type, error, reward) => {
+    //   if (type === RewardedAdEventType.LOADED) {
+    //     rewarded.show();
+    //   }
+    //   if (type === RewardedAdEventType.EARNED_REWARD) {
+    //     console.log('User earned reward of ', reward);
+    //   }
+    // });
+    
+    // rewarded.load();
+  }, [])
     const [state, dispatch] = useReducer(reducer, initialState)
-    useEffect(() => {
-      // interstitial.onAdEvent((type) => {
-      //   if (type === AdEventType.LOADED) {
-      //     interstitial.show();
-      //   }
-      // });
-      
-      // interstitial.load();
-    }, [])
     goBack = () => {
         props.navigation.goBack()
     }
@@ -48,17 +54,20 @@ const Help = (props) => {
       console.log('resss', res)
     }
 
+    const openLink = () => {
+        Linking.openURL('https://www.javatpoint.com/react-native-third-party-libraries')
+       }
     const handleClickEvent = () => {
-        //console.log('state', state)
-       if(state.name && state.email && state.phone && state.description){
+        console.log('state', state, state.phone.length)
+       if(state.name && state.email && state.phone && state.about){
            if(state.phone.length == 10){
        database()
-       .ref('/help')
+       .ref('/member')
        .push({
          name : state.name,
          phone : state.phone,
          email : state.email,
-         description : state.description
+         about : state.about
        })
        .then(() => {
            Alert.alert("You will be notified shortly")
@@ -69,27 +78,24 @@ const Help = (props) => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              title: 'Help Needed',
-              body: state.name + state.phone + 'Help Needed'
+              title: 'New Member Added',
+              body: state.name + state.phone + 'has been aded'
             }),
           })
             .then((response) => result(response))
             .then((responseJson) => {
-              console.log('respos', responseJson);
-              rewarded.onAdEvent((type, error, reward) => {
-                if (type === RewardedAdEventType.LOADED) {
-                  rewarded.show();
-                }
-                if (type === RewardedAdEventType.EARNED_REWARD) {
-                  console.log('User earned reward of ', reward);
+              interstitial2.onAdEvent((type) => {
+                if (type === AdEventType.LOADED) {
+                  interstitial2.show();
                 }
               });
               
-              rewarded.load();
+              interstitial2.load();
             })
             .catch((error) => {
               console.error('error', error);
             })});
+       
     }
     else {
         Alert.alert("Invalid Phone Number")
@@ -102,54 +108,61 @@ const Help = (props) => {
        // alert(`${form['name'].value} ${form['email'].value} ${form['phone'].value}`)
     }
 
-    const nextScreen = () => {
-      props.navigation.navigate('Member')
+    const storeData = async () => {
+        try {
+          await AsyncStorage.setItem('premium', 'yes')
+        } catch (e) {
+          // saving error
+        }
+      }
+
+    const nextScreen = async () => {
+       const data =  await AsyncStorage.getItem('premium')
+       console.log('data is', data)
+        props.navigation.navigate('list')
+        storeData()
+        // RNUpiPayment.initializePayment(
+        //     {
+        //       vpa: "9646407363@ybl", 
+        //       payeeName: "John Doe",
+        //       amount: "101",
+        //       transactionRef: "aasf-332-aoei-fn",
+        //     },
+        //     successCallback,
+        //     failureCallback
+        //   );
     }
-const openLink = () => {
- Linking.openURL('https://stackoverflow.com/questions/44446523/unable-to-load-script-from-assets-index-android-bundle-on-windows')
-}
-    const alertFunc = (first, second) => {
-           if(first == 'name'){
-           dispatch({ type: 'name', value: second })
-        }
-        if(first == 'email'){
-           dispatch({ type: 'email', value: second })
-        }
-        if(first == 'phone'){
-           dispatch({ type: 'phone', value: second })
-        }
-        if(first == 'description'){
-            dispatch({ type: 'description', value: second })
-         }
-    }
+    const successCallback = (res) => {
+        props.navigation.navigate('list')
+      };
     
+      const failureCallback = (err) => {
+        console.log("res", err);
+      };
     return( <><View style={styles.toolbar}>
-                <TouchableOpacity style={styles.toolbarButton} onPress={() => goBack()}>
-                     <Image style={{width:30,marginLeft:5,  height:30}}source={require('../images/back.png')}></Image>
-                     </TouchableOpacity>
-                     <Text style={styles.toolbarTitle}>React Native Common Issues</Text>
-                     <Text style={styles.toolbarButton}></Text>
-                 </View>
-                 
-        <View
-          style={styles.scrollView}>
-          <Text style={{textAlign :'center', fontSize : 25, fontWeight : '600'}}>1. Red Screen Error (Unable to resolve scripts from assets/could not connect to development server) </Text>
-          <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 10}}>This is most common error which is faced by any fresher who start learning react native. Basically, this is the issue due to bundler. If you want to run an android/ios app on your phone, you need to start development server (local server by typing npm start). Then, if your android phone is connected through usb cable and your sdk path is correct, you will be good to go. But, if you still face an error, you need to type command - adb reverse tcp:8081 tcp:8081. By opening terminal inside platform tools of sdk path <Text style={{textDecorationLine: 'underline', color : 'blue'}} onPress={() => openLink()}>link</Text></Text>
+        <TouchableOpacity style={styles.toolbarButton} onPress={() => goBack()}>
+             <Image style={{width:30,marginLeft:5,  height:30}}source={require('../images/back.png')}></Image>
+             </TouchableOpacity>
+             <Text style={styles.toolbarTitle}>Issue 3</Text>
+             <Text style={styles.toolbarButton}></Text>
+         </View>
+         <View
+        style={{...styles.scrollView, marginTop : 20}}>
+          <Text style={{textAlign :'center', fontSize : 25, fontWeight : '600'}}>3. Third Party Linking Error </Text>
+          <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 10}}>If you are a beginner or an intermediate, you certainly can face the third party linking issue. If you are using 0.60 or before based react native, you can link the third party automatically (react native link)or manually (by following this) {' '} <Text style={{textDecorationLine: 'underline', color : 'blue'}} onPress={() => openLink()}> link</Text>{' '} But if you are using latest version of react native, you only need to install the library in android and for ios, you need to install pod install for working with third party library such as (react-native-gifted-chat)</Text>
           <TouchableOpacity style={styles.buttonWidth} onPress={() => nextScreen()}>
             <Text style={styles.alignCenter}>Next</Text>
           </TouchableOpacity>
           {/* <Button title="Get Started" onPress={() => callFun()}/> */}
          
         </View>
-      
-     <View style={{marginTop : 10}}>
-     <BannerAd  unitId={'ca-app-pub-1116385198791430/6744474732'} size={BannerAdSize.FULL_BANNER}/>
-      </View> 
-      </>)
+<View style={{marginTop : 30}}>
+{/* <Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button> */}
+<BannerAd unitId={'ca-app-pub-1116385198791430/8099834722'} size={BannerAdSize.FULL_BANNER}/>
+</View></>)
 }
 
-export default Help
-
+export default Question;
 const styles = StyleSheet.create({
     toolbar:{
       backgroundColor:'#e74c3c',
@@ -229,7 +242,7 @@ const styles = StyleSheet.create({
     buttonWidth : {
       width : '80%',
       backgroundColor : '#e74c3c',
-      marginTop : 10,
+      marginTop : 30,
       height : 40,
       justifyContent : 'center',
       alignSelf : 'center'

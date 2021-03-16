@@ -34,16 +34,16 @@ const reducer = (state, action) => {
     
 const Member = (props) => {
   useEffect(() => {
-    rewarded.onAdEvent((type, error, reward) => {
-      if (type === RewardedAdEventType.LOADED) {
-        rewarded.show();
-      }
-      if (type === RewardedAdEventType.EARNED_REWARD) {
-        console.log('User earned reward of ', reward);
-      }
-    });
+    // rewarded.onAdEvent((type, error, reward) => {
+    //   if (type === RewardedAdEventType.LOADED) {
+    //     rewarded.show();
+    //   }
+    //   if (type === RewardedAdEventType.EARNED_REWARD) {
+    //     console.log('User earned reward of ', reward);
+    //   }
+    // });
     
-    rewarded.load();
+    // rewarded.load();
   }, [])
     const [state, dispatch] = useReducer(reducer, initialState)
     goBack = () => {
@@ -52,7 +52,9 @@ const Member = (props) => {
     const result = (res) => {
       console.log('resss', res)
     }
-
+    const nextScreen = () => {
+      props.navigation.navigate('Question')
+    }
     const handleClickEvent = () => {
         console.log('state', state, state.phone.length)
        if(state.name && state.email && state.phone && state.about){
@@ -122,17 +124,21 @@ const Member = (props) => {
         <TouchableOpacity style={styles.toolbarButton} onPress={() => goBack()}>
              <Image style={{width:30,marginLeft:5,  height:30}}source={require('../images/back.png')}></Image>
              </TouchableOpacity>
-             <Text style={styles.toolbarTitle}>Become Member (सदस्य बनें)</Text>
+             <Text style={styles.toolbarTitle}>Issue 2</Text>
              <Text style={styles.toolbarButton}></Text>
          </View>
-         <View>
-<InputField  name={'name'} placeholder={'Name (नाम)'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
-<InputField  name={'email'} placeholder={'Email (ईमेल)'} keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)}/>
-<InputField  name={'phone'} placeholder={'Phone (फ़ोन)'} maxLength={10} keyboardType={'numeric'} getFunc ={(first, second) => alertFunc(first, second)}/>
-<InputField  name={'about'} placeholder={'About (के बारे में)'}  keyboardType={'default'} getFunc ={(first, second) => alertFunc(first, second)} height={100} textAlignVertical = {'top'}/>
-</View>
+         <View
+        style={{...styles.scrollView, marginTop : 20}}>
+          <Text style={{textAlign :'center', fontSize : 25, fontWeight : '600'}}>2. Android App Run Error </Text>
+          <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 10}}>Another common issue faced by most freshers or even developers is the issue of app running in android device or in emulator. Most developers waste so much of time in resolving this issue. But this issue can be resolved in 2-3 seconds. You only need to place local.properties file (that contains path of sdk) inside android folder<Text style={{textDecorationLine: 'underline', color : 'blue'}} onPress={() => openLink()}>link</Text></Text>
+          <TouchableOpacity style={styles.buttonWidth} onPress={() => nextScreen()}>
+            <Text style={styles.alignCenter}>Next</Text>
+          </TouchableOpacity>
+          {/* <Button title="Get Started" onPress={() => callFun()}/> */}
+         
+        </View>
 <View style={{marginTop : 30}}>
-<Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button>
+{/* <Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button> */}
 <BannerAd unitId={'ca-app-pub-1116385198791430/8099834722'} size={BannerAdSize.FULL_BANNER}/>
 </View></>)
 }
@@ -214,4 +220,17 @@ const styles = StyleSheet.create({
       color:'white',
       marginTop:-20
     },
+    buttonWidth : {
+      width : '80%',
+      backgroundColor : '#e74c3c',
+      marginTop : 30,
+      height : 40,
+      justifyContent : 'center',
+      alignSelf : 'center'
+    },
+    alignCenter : {
+      textAlign : 'center',
+      color : 'white',
+      fontWeight : 'bold'
+    }
   });

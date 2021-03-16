@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './components/Home'
 import Help from './components/Help'
 import Member from './components/Member'
+import Question from './components/Question'
+import QuestionList from './components/QuestionsList'
 
 function HomeScreen() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Stack.Screen name="Home" options={{headerShown: false}} component={Home} />
         <Stack.Screen name="Help" options={{headerShown: false}} component={Help} />
         <Stack.Screen name="Member" options={{headerShown: false}} component={Member} />
+        <Stack.Screen name="Question" options={{headerShown: false}} component={Question} />
+        <Stack.Screen name="list" options={{headerShown: false}} component={QuestionList} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,4 +1,4 @@
-package com.comeandhelp;
+package com.reactnativeproject;
 
 import android.app.Application;
 import android.content.Context;

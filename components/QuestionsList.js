@@ -1,64 +1,58 @@
-import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert, Linking} from 'react-native'
+import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert} from 'react-native'
 import React, { useEffect, useRef, useReducer } from 'react';
 import InputField from './InputField'
 import database from '@react-native-firebase/database';
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
-const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/4118311398', {
+const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/9894857030', {
   requestNonPersonalizedAdsOnly: true,
 });
-const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/5352777109', {
+const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/6567153406', {
   requestNonPersonalizedAdsOnly: true,
 });
-
 const initialState = {
     name: '',
     email: '',
     phone : '',
-    description : ''
+    about : ''
 }
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'name':
-            return { ...state, name: action.value }
-        case 'email':
-            return { ...state, email: action.value }
-        case 'phone':
-            return { ...state, phone: action.value }
-        case 'description':
-                return { ...state, description: action.value }
-        default:
-            return state
-    }
-}
-const Help = (props) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
-    useEffect(() => {
-      // interstitial.onAdEvent((type) => {
-      //   if (type === AdEventType.LOADED) {
-      //     interstitial.show();
-      //   }
-      // });
-      
-      // interstitial.load();
-    }, [])
+
+
+   
+    
+const QuestionsList = (props) => {
+  useEffect(() => {
+    // rewarded.onAdEvent((type, error, reward) => {
+    //   if (type === RewardedAdEventType.LOADED) {
+    //     rewarded.show();
+    //   }
+    //   if (type === RewardedAdEventType.EARNED_REWARD) {
+    //     console.log('User earned reward of ', reward);
+    //   }
+    // });
+    
+    // rewarded.load();
+  }, [])
+    
     goBack = () => {
         props.navigation.goBack()
     }
     const result = (res) => {
       console.log('resss', res)
     }
-
+    const nextScreen = () => {
+      props.navigation.navigate('Question')
+    }
     const handleClickEvent = () => {
-        //console.log('state', state)
-       if(state.name && state.email && state.phone && state.description){
+        console.log('state', state, state.phone.length)
+       if(state.name && state.email && state.phone && state.about){
            if(state.phone.length == 10){
        database()
-       .ref('/help')
+       .ref('/member')
        .push({
          name : state.name,
          phone : state.phone,
          email : state.email,
-         description : state.description
+         about : state.about
        })
        .then(() => {
            Alert.alert("You will be notified shortly")
@@ -69,27 +63,24 @@ const Help = (props) => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              title: 'Help Needed',
-              body: state.name + state.phone + 'Help Needed'
+              title: 'New Member Added',
+              body: state.name + state.phone + 'has been aded'
             }),
           })
             .then((response) => result(response))
             .then((responseJson) => {
-              console.log('respos', responseJson);
-              rewarded.onAdEvent((type, error, reward) => {
-                if (type === RewardedAdEventType.LOADED) {
-                  rewarded.show();
-                }
-                if (type === RewardedAdEventType.EARNED_REWARD) {
-                  console.log('User earned reward of ', reward);
+              interstitial2.onAdEvent((type) => {
+                if (type === AdEventType.LOADED) {
+                  interstitial2.show();
                 }
               });
               
-              rewarded.load();
+              interstitial2.load();
             })
             .catch((error) => {
               console.error('error', error);
             })});
+       
     }
     else {
         Alert.alert("Invalid Phone Number")
@@ -102,12 +93,6 @@ const Help = (props) => {
        // alert(`${form['name'].value} ${form['email'].value} ${form['phone'].value}`)
     }
 
-    const nextScreen = () => {
-      props.navigation.navigate('Member')
-    }
-const openLink = () => {
- Linking.openURL('https://stackoverflow.com/questions/44446523/unable-to-load-script-from-assets-index-android-bundle-on-windows')
-}
     const alertFunc = (first, second) => {
            if(first == 'name'){
            dispatch({ type: 'name', value: second })
@@ -118,38 +103,34 @@ const openLink = () => {
         if(first == 'phone'){
            dispatch({ type: 'phone', value: second })
         }
-        if(first == 'description'){
-            dispatch({ type: 'description', value: second })
+        if(first == 'about'){
+            dispatch({ type: 'about', value: second })
          }
     }
-    
     return( <><View style={styles.toolbar}>
-                <TouchableOpacity style={styles.toolbarButton} onPress={() => goBack()}>
-                     <Image style={{width:30,marginLeft:5,  height:30}}source={require('../images/back.png')}></Image>
-                     </TouchableOpacity>
-                     <Text style={styles.toolbarTitle}>React Native Common Issues</Text>
-                     <Text style={styles.toolbarButton}></Text>
-                 </View>
-                 
-        <View
-          style={styles.scrollView}>
-          <Text style={{textAlign :'center', fontSize : 25, fontWeight : '600'}}>1. Red Screen Error (Unable to resolve scripts from assets/could not connect to development server) </Text>
-          <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 10}}>This is most common error which is faced by any fresher who start learning react native. Basically, this is the issue due to bundler. If you want to run an android/ios app on your phone, you need to start development server (local server by typing npm start). Then, if your android phone is connected through usb cable and your sdk path is correct, you will be good to go. But, if you still face an error, you need to type command - adb reverse tcp:8081 tcp:8081. By opening terminal inside platform tools of sdk path <Text style={{textDecorationLine: 'underline', color : 'blue'}} onPress={() => openLink()}>link</Text></Text>
+        <TouchableOpacity style={styles.toolbarButton} onPress={() => goBack()}>
+             <Image style={{width:30,marginLeft:5,  height:30}}source={require('../images/back.png')}></Image>
+             </TouchableOpacity>
+             <Text style={styles.toolbarTitle}>Issue 2</Text>
+             <Text style={styles.toolbarButton}></Text>
+         </View>
+         <View
+        style={{...styles.scrollView, marginTop : 20}}>
+          <Text style={{textAlign :'center', fontSize : 25, fontWeight : '600'}}>2. Android App Run Error </Text>
+          <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 10}}>Another common issue faced by most freshers or even developers is the issue of app running in android device or in emulator. Most developers waste so much of time in resolving this issue. But this issue can be resolved in 2-3 seconds. You only need to place local.properties file (that contains path of sdk) inside android folder<Text style={{textDecorationLine: 'underline', color : 'blue'}} onPress={() => openLink()}>link</Text></Text>
           <TouchableOpacity style={styles.buttonWidth} onPress={() => nextScreen()}>
             <Text style={styles.alignCenter}>Next</Text>
           </TouchableOpacity>
           {/* <Button title="Get Started" onPress={() => callFun()}/> */}
          
         </View>
-      
-     <View style={{marginTop : 10}}>
-     <BannerAd  unitId={'ca-app-pub-1116385198791430/6744474732'} size={BannerAdSize.FULL_BANNER}/>
-      </View> 
-      </>)
+<View style={{marginTop : 30}}>
+{/* <Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button> */}
+<BannerAd unitId={'ca-app-pub-1116385198791430/8099834722'} size={BannerAdSize.FULL_BANNER}/>
+</View></>)
 }
 
-export default Help
-
+export default QuestionsList;
 const styles = StyleSheet.create({
     toolbar:{
       backgroundColor:'#e74c3c',
@@ -229,7 +210,7 @@ const styles = StyleSheet.create({
     buttonWidth : {
       width : '80%',
       backgroundColor : '#e74c3c',
-      marginTop : 10,
+      marginTop : 30,
       height : 40,
       justifyContent : 'center',
       alignSelf : 'center'
