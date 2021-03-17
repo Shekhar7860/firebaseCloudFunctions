@@ -156,7 +156,7 @@ const Question = (props) => {
           {/* <Button title="Get Started" onPress={() => callFun()}/> */}
          
         </View>
-<View style={{marginTop : 30}}>
+<View style={{marginTop : 30, alignItems : 'center'}}>
 {/* <Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button> */}
 <BannerAd unitId={'ca-app-pub-1116385198791430/8099834722'} size={BannerAdSize.FULL_BANNER}/>
 </View></>)

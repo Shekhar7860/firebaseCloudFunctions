@@ -142,7 +142,7 @@ const openLink = () => {
          
         </View>
       
-     <View style={{marginTop : 10}}>
+     <View style={{marginTop : 10, alignItems : 'center'}}>
      <BannerAd  unitId={'ca-app-pub-1116385198791430/6744474732'} size={BannerAdSize.FULL_BANNER}/>
       </View> 
       </>)

@@ -1,7 +1,14 @@
-import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert} from 'react-native'
-import React, { useEffect, useRef, useReducer } from 'react';
+import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert,  Dimensions} from 'react-native'
+import React, { useEffect, useState } from 'react';
 import InputField from './InputField'
 import database from '@react-native-firebase/database';
+import Carousel from 'react-native-snap-carousel';
+const horizontalMargin = 20;
+const slideWidth = 280;
+
+const sliderWidth = Dimensions.get("window").width;
+const itemWidth = slideWidth + horizontalMargin * 2;
+const itemHeight = 100;
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
 const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/9894857030', {
   requestNonPersonalizedAdsOnly: true,
@@ -20,7 +27,24 @@ const initialState = {
    
     
 const QuestionsList = (props) => {
+  const [data, setData] = useState([])
   useEffect(() => {
+    database().ref('/requests').once('value')
+     .then((dataSnapshot) => {
+   //   alert(';jsjjss')
+       let newdata = dataSnapshot.val();
+     //  console.log(dataSnapshot)
+     if(dataSnapshot.val())
+     {
+       let items = Object.values(newdata);
+      setData(items)
+      
+     }
+       
+      }).catch((error)=>{
+        //error callback
+        console.log('error ' , error)
+    })
     // rewarded.onAdEvent((type, error, reward) => {
     //   if (type === RewardedAdEventType.LOADED) {
     //     rewarded.show();
@@ -107,24 +131,40 @@ const QuestionsList = (props) => {
             dispatch({ type: 'about', value: second })
          }
     }
+   const  _renderItem =  ({item, index}) =>  {
+        return (
+          <View style={{height :400, backgroundColor : '#16a085', paddingTop : 10}}>
+          <Text style={{color :'white', margin:10}}>Q - {item.location}</Text>
+              <Text style={{color :'white', marginLeft : 10, marginTop : 5}}>A- {item.name}</Text>
+          </View>
+      );}
     return( <><View style={styles.toolbar}>
         <TouchableOpacity style={styles.toolbarButton} onPress={() => goBack()}>
              <Image style={{width:30,marginLeft:5,  height:30}}source={require('../images/back.png')}></Image>
              </TouchableOpacity>
-             <Text style={styles.toolbarTitle}>Issue 2</Text>
+             <Text style={styles.toolbarTitle}>Issues List</Text>
              <Text style={styles.toolbarButton}></Text>
          </View>
          <View
         style={{...styles.scrollView, marginTop : 20}}>
-          <Text style={{textAlign :'center', fontSize : 25, fontWeight : '600'}}>2. Android App Run Error </Text>
-          <Text style={{textAlign :'center', fontSize : 20, fontWeight : '600', marginTop : 10}}>Another common issue faced by most freshers or even developers is the issue of app running in android device or in emulator. Most developers waste so much of time in resolving this issue. But this issue can be resolved in 2-3 seconds. You only need to place local.properties file (that contains path of sdk) inside android folder<Text style={{textDecorationLine: 'underline', color : 'blue'}} onPress={() => openLink()}>link</Text></Text>
+         { data.length !== 0? <Carousel
+       layout={'tinder'} 
+            data={data}
+            renderItem={_renderItem}
+       sliderWidth={sliderWidth}
+        itemWidth={itemWidth}
+            inactiveSlideScale={1}
+            inactiveSlideOpacity={1}
+            autoplay={false}
+            snapOnAndroid={true} //to enable snapping on android
+            /> : <View><Text style={{textAlign :'center', fontSize : 20}}>Please Wait</Text></View>}
           <TouchableOpacity style={styles.buttonWidth} onPress={() => nextScreen()}>
-            <Text style={styles.alignCenter}>Next</Text>
+            <Text style={styles.alignCenter}>Submit Query</Text>
           </TouchableOpacity>
           {/* <Button title="Get Started" onPress={() => callFun()}/> */}
          
         </View>
-<View style={{marginTop : 30}}>
+<View style={{marginTop : 30, alignItems : 'center'}}>
 {/* <Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button> */}
 <BannerAd unitId={'ca-app-pub-1116385198791430/8099834722'} size={BannerAdSize.FULL_BANNER}/>
 </View></>)

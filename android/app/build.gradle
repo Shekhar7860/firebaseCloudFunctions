@@ -130,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.reactnativeproject"
+        applicationId "com.reactnativequestions"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

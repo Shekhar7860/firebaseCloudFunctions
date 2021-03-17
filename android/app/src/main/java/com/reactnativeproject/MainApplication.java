@@ -1,4 +1,4 @@
-package com.reactnativeproject;
+package com.reactnativequestions;
 
 import android.app.Application;
 import android.content.Context;
