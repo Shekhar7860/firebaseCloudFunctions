@@ -10,10 +10,10 @@ const sliderWidth = Dimensions.get("window").width;
 const itemWidth = slideWidth + horizontalMargin * 2;
 const itemHeight = 100;
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
-const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/9894857030', {
+const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/2772698847', {
   requestNonPersonalizedAdsOnly: true,
 });
-const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/6567153406', {
+const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/8763392128', {
   requestNonPersonalizedAdsOnly: true,
 });
 const initialState = {
@@ -166,7 +166,7 @@ const QuestionsList = (props) => {
         </View>
 <View style={{marginTop : 30, alignItems : 'center'}}>
 {/* <Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button> */}
-<BannerAd unitId={'ca-app-pub-1116385198791430/8099834722'} size={BannerAdSize.FULL_BANNER}/>
+<BannerAd unitId={'ca-app-pub-1116385198791430/7244288710'} size={BannerAdSize.FULL_BANNER}/>
 </View></>)
 }
 

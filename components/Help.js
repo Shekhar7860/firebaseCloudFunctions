@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useReducer } from 'react';
 import InputField from './InputField'
 import database from '@react-native-firebase/database';
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
-const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/4118311398', {
+const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/3100001907', {
   requestNonPersonalizedAdsOnly: true,
 });
-const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/5352777109', {
+const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/2661018203', {
   requestNonPersonalizedAdsOnly: true,
 });
 
@@ -143,7 +143,7 @@ const openLink = () => {
         </View>
       
      <View style={{marginTop : 10, alignItems : 'center'}}>
-     <BannerAd  unitId={'ca-app-pub-1116385198791430/6744474732'} size={BannerAdSize.FULL_BANNER}/>
+     <BannerAd  unitId={'ca-app-pub-1116385198791430/3483145280'} size={BannerAdSize.FULL_BANNER}/>
       </View> 
       </>)
 }

@@ -2,10 +2,10 @@ import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Aler
 import React, { useEffect, useRef, useReducer } from 'react';
 import database from '@react-native-firebase/database';
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
-const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/9894857030', {
+const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/2936350375', {
   requestNonPersonalizedAdsOnly: true,
 });
-const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/6567153406', {
+const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/5625274651', {
   requestNonPersonalizedAdsOnly: true,
 });
 import RNUpiPayment from "react-native-upi-pay";
@@ -158,7 +158,7 @@ const Question = (props) => {
         </View>
 <View style={{marginTop : 30, alignItems : 'center'}}>
 {/* <Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button> */}
-<BannerAd unitId={'ca-app-pub-1116385198791430/8099834722'} size={BannerAdSize.FULL_BANNER}/>
+<BannerAd unitId={'ca-app-pub-1116385198791430/8380248740'} size={BannerAdSize.FULL_BANNER}/>
 </View></>)
 }
 
