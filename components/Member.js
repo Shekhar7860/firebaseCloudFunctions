@@ -1,12 +1,14 @@
-import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert} from 'react-native'
-import React, { useEffect, useRef, useReducer } from 'react';
+import { AdEventType, BannerAd, BannerAdSize, InterstitialAd, RewardedAd, RewardedAdEventType, TestIds } from '@react-native-firebase/admob';
+import {Alert, Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import React, { useEffect, useReducer, useRef } from 'react';
+
 import InputField from './InputField'
 import database from '@react-native-firebase/database';
-import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
-const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/9894857030', {
+
+const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-4515670409707693/7738362983', {
   requestNonPersonalizedAdsOnly: true,
 });
-const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/6567153406', {
+const rewarded = RewardedAd.createForAdRequest('ca-app-pub-4515670409707693/1707307102', {
   requestNonPersonalizedAdsOnly: true,
 });
 const initialState = {
@@ -34,16 +36,7 @@ const reducer = (state, action) => {
     
 const Member = (props) => {
   useEffect(() => {
-    // rewarded.onAdEvent((type, error, reward) => {
-    //   if (type === RewardedAdEventType.LOADED) {
-    //     rewarded.show();
-    //   }
-    //   if (type === RewardedAdEventType.EARNED_REWARD) {
-    //     console.log('User earned reward of ', reward);
-    //   }
-    // });
     
-    // rewarded.load();
   }, [])
     const [state, dispatch] = useReducer(reducer, initialState)
     goBack = () => {
@@ -53,6 +46,13 @@ const Member = (props) => {
       console.log('resss', res)
     }
     const nextScreen = () => {
+      interstitial2.onAdEvent((type) => {
+        if (type === AdEventType.LOADED) {
+          interstitial2.show();
+        }
+      });
+      
+      interstitial2.load();
       props.navigation.navigate('Question')
     }
     const handleClickEvent = () => {
@@ -82,13 +82,7 @@ const Member = (props) => {
           })
             .then((response) => result(response))
             .then((responseJson) => {
-              interstitial2.onAdEvent((type) => {
-                if (type === AdEventType.LOADED) {
-                  interstitial2.show();
-                }
-              });
               
-              interstitial2.load();
             })
             .catch((error) => {
               console.error('error', error);
@@ -137,9 +131,9 @@ const Member = (props) => {
           {/* <Button title="Get Started" onPress={() => callFun()}/> */}
          
         </View>
-<View style={{marginTop : 30}}>
+<View style={{marginTop : 30, alignItems : 'center'}}>
 {/* <Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button> */}
-<BannerAd unitId={'ca-app-pub-1116385198791430/8099834722'} size={BannerAdSize.FULL_BANNER}/>
+<BannerAd unitId={'ca-app-pub-4515670409707693/2799545856'} size={BannerAdSize.FULL_BANNER}/>
 </View></>)
 }
 

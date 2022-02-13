@@ -6,28 +6,28 @@
  * @flow strict-local
  */
 
-import React, { useEffect } from 'react';
+import { AdEventType, BannerAd, BannerAdSize, InterstitialAd, RewardedAd, RewardedAdEventType, TestIds } from '@react-native-firebase/admob';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
   Button,
-  TouchableOpacity
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import database from '@react-native-firebase/database';
-import messaging from '@react-native-firebase/messaging';
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
   DebugInstructions,
+  Header,
+  LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
+import React, { useEffect } from 'react';
 
+import database from '@react-native-firebase/database';
+import messaging from '@react-native-firebase/messaging';
 
 async function saveTokenToDatabase(token) {
   // Assume user is already signed in
@@ -79,7 +79,9 @@ const Home: (props) => React$Node = (props) => {
   }
   return (
     <>
-    <BannerAd unitId={'ca-app-pub-1116385198791430/7349951722'} size={BannerAdSize.FULL_BANNER}/>
+     <View style={{alignItems : 'center'}}>
+    <BannerAd unitId={'ca-app-pub-4515670409707693/5160193301'} size={BannerAdSize.FULL_BANNER}/>
+    </View>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={{flex:1}}>
         <View

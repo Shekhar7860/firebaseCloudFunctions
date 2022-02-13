@@ -1,15 +1,18 @@
-import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert, Linking} from 'react-native'
-import React, { useEffect, useRef, useReducer } from 'react';
+import { AdEventType, BannerAd, BannerAdSize, InterstitialAd, RewardedAd, RewardedAdEventType, TestIds } from '@react-native-firebase/admob';
+import {Alert, Button, Image, Linking, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import React, { useEffect, useReducer, useRef } from 'react';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import database from '@react-native-firebase/database';
-import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
-const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/2936350375', {
+
+const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-4515670409707693/7225876025', {
   requestNonPersonalizedAdsOnly: true,
 });
 const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/5625274651', {
   requestNonPersonalizedAdsOnly: true,
 });
-import RNUpiPayment from "react-native-upi-pay";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import RNUpiPayment from "react-native-upi-pay";
+
 const initialState = {
     name: '',
     email: '',
@@ -84,13 +87,7 @@ const Question = (props) => {
           })
             .then((response) => result(response))
             .then((responseJson) => {
-              interstitial2.onAdEvent((type) => {
-                if (type === AdEventType.LOADED) {
-                  interstitial2.show();
-                }
-              });
-              
-              interstitial2.load();
+             
             })
             .catch((error) => {
               console.error('error', error);
@@ -117,10 +114,17 @@ const Question = (props) => {
       }
 
     const nextScreen = async () => {
-       const data =  await AsyncStorage.getItem('premium')
-       console.log('data is', data)
+      //  const data =  await AsyncStorage.getItem('premium')
+      //  console.log('data is', data)
+      interstitial2.onAdEvent((type) => {
+        if (type === AdEventType.LOADED) {
+          interstitial2.show();
+        }
+      });
+      
+      interstitial2.load();
         props.navigation.navigate('list')
-        storeData()
+        // storeData()
         // RNUpiPayment.initializePayment(
         //     {
         //       vpa: "9646407363@ybl", 
@@ -158,7 +162,7 @@ const Question = (props) => {
         </View>
 <View style={{marginTop : 30, alignItems : 'center'}}>
 {/* <Button onPress={handleClickEvent} title={'Submit (प्रस्तुत)'}></Button> */}
-<BannerAd unitId={'ca-app-pub-1116385198791430/8380248740'} size={BannerAdSize.FULL_BANNER}/>
+<BannerAd unitId={'ca-app-pub-4515670409707693/2785419206'} size={BannerAdSize.FULL_BANNER}/>
 </View></>)
 }
 

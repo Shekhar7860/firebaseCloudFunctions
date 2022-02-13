@@ -1,16 +1,19 @@
-import {Text, StyleSheet, Image, View, TouchableOpacity, TextInput, Button, Alert,  Dimensions} from 'react-native'
+import { AdEventType, BannerAd, BannerAdSize, InterstitialAd, RewardedAd, RewardedAdEventType, TestIds } from '@react-native-firebase/admob';
+import {Alert, Button, Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import React, { useEffect, useState } from 'react';
+
+import Carousel from 'react-native-snap-carousel';
 import InputField from './InputField'
 import database from '@react-native-firebase/database';
-import Carousel from 'react-native-snap-carousel';
+
 const horizontalMargin = 20;
 const slideWidth = 280;
 
 const sliderWidth = Dimensions.get("window").width;
 const itemWidth = slideWidth + horizontalMargin * 2;
 const itemHeight = 100;
-import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType  } from '@react-native-firebase/admob';
-const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-1116385198791430/2772698847', {
+
+const interstitial2 = InterstitialAd.createForAdRequest('ca-app-pub-4515670409707693/5884874190', {
   requestNonPersonalizedAdsOnly: true,
 });
 const rewarded = RewardedAd.createForAdRequest('ca-app-pub-1116385198791430/8763392128', {
